@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var users = []
+        function getDataFromServer (displayData){
+            var getInfo=new XMLHttpRequest()
+            getInfo.onreadystatechange=function (){
+                if(getInfo.status==200 && getInfo.readyState==4){
+                    users = JSON.parse(getInfo.response)
+                    displayData()
+                }
+            }
+
+            getInfo.open("GET","https://jsonplaceholder.typicode.com/users");
+            getInfo.send()
+        }
+        function displayData(){
+            console.log(users)
+        }
+
+        getDataFromServer(displayData) // WIll get the Data from Server
+        //displayData() // will display The Data
+    </script>
+</body>
+</html>
